@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>أسعار الاشتراك – الخصوصي</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      direction: rtl;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+    h1, h2 {
+      margin: 10px 0;
+    }
+    .options {
+      margin-top: 30px;
+    }
+    .option {
+      background-color: #1e1e1e;
+      padding: 15px;
+      margin: 10px 0;
+      border: 1px solid #333;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .option:hover {
+      background-color: #333333;
+    }
+    .note {
+      margin-top: 20px;
+      font-size: 0.9em;
+      color: #bbbbbb;
+    }
+    .details {
+      text-align: right;
+      font-size: 1.3em;
+      white-space: pre-line;
+      line-height: 1.6;
+    }
+    .details img {
+      max-width: 100%;
+      display: block;
+      margin: 10px auto;
+    }
+    .details button {
+      background-color: #333333;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .details button:hover {
+      background-color: #555555;
+    }
+    .download-container {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="container">
+    <h1>أسعار الاشتراك</h1>
+    <h2>اكو 3 طرق للدفع.</h2>
+    <h2>انت تريد تدفع بأي طريقة ؟</h2>
+    
+    <div class="options">
+      <div class="option" id="mastercard">??? الماستر كارد (29 الف)</div>
+      <div class="option" id="zaincash">?? زين كاش (29 الف)</div>
+      <div class="option" id="cards">??? كارتات رصيد (50 الف)</div>
+    </div>
+    <p class="note">ملاحظة: راح اضيفك للخصوصي بعد ما تدفع مبلغ الاشتراك. ما اضيف احد قبل ما يدفع نهائيا!</p>
+  </div>
+
+  <script>
+    const container = document.getElementById('container');
+    let mainHTML = container.innerHTML;
+
+    function attachListeners() {
+      document.getElementById('mastercard')?.addEventListener('click', function() {
+        showDetails(`- سعر الاشتراك 29 الف اذا عن طريق الماستر كارد ??<br><br>
+- هذا رقم الكي كارد مالتي<br>
+3399410673<br><br>
+- اذا تكدر من تلفونك و حولهن على هذا الرقم ، واذا ما تكدر تحولهن بالبيت، روح لابو المكتب وتنطي هذا الرقم مال الماستر وتنطي الفلوس وراح يحولهن الي<br><br>
+- اذا عندك سؤال او اي شي ما واضح راسلني ع الخاص @Ali_55555 ??`);
+      });
+
+      document.getElementById('zaincash')?.addEventListener('click', function() {
+        showDetails(`1. تروح لأبو المكتب مال الموبايلات وتسألة عندك تحويل زين كاش لو لا ، اذا عدهم تحويل تنطي الفلوس والباركود. وأبو المكتب راح يصور الباركود.<br><br>
+هذا الباركود: <br>
+<img src="pics/barcode.jpg" alt="Barcode"><br>
+<div class="download-container">
+  <a href="pics/barcode.jpg" download="barcode.jpg">
+    <button>حفظ الصورة بالجهاز</button>
+  </a>
+</div>
+<br>
+2. ورة ما يكمل ويحولهن للاستاذ ، راح تطلع رسالة بتلفون ابو المكتب مكتوب تم التحويل. تصورها بتلفونك<br><br>
+3. وبعدها تجي ترسل الصورة ع الخاص @Ali_55555 وراح اضيفك للقناة مال الخصوصي.`);
+      });
+
+      document.getElementById('cards')?.addEventListener('click', function() {
+        showDetails(`الاشتراك ع الرصيد ب50 الف ، تشتري الرصيد وتصورة وتدزة الي ع الخاص @Ali_55555`);
+      });
+    }
+
+    function showDetails(detailsContent) {
+      history.pushState({ page: "details" }, "", "#details");
+      container.innerHTML = `<div class="details">${detailsContent}</div>`;
+    }
+
+    window.addEventListener('popstate', function(event) {
+      if (!event.state || event.state.page === "main") {
+        container.innerHTML = mainHTML;
+        attachListeners();
+      }
+    });
+
+    if (!history.state) {
+      history.replaceState({ page: "main" }, "", location.pathname);
+    }
+
+    attachListeners();
+  </script>
+</body>
+</html>
