@@ -2,9 +2,8 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <!-- لضمان التوافق مع الأجهزة المحمولة -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>أسعار الاشتراك – الخصوصي</title>
+  <title>تفاصيل الاشتراك</title>
   <style>
     body {
       background-color: #121212;
@@ -20,101 +19,110 @@
       margin: auto;
       text-align: center;
     }
-    h1, h2 {
+    h1 {
       margin: 10px 0;
     }
     .options {
-      margin-top: 30px;
+      margin-top: 50px;
     }
     .option {
       background-color: #1e1e1e;
       padding: 15px;
       margin: 10px 0;
-      border: 1px solid #333;
-      border-radius: 8px;
+      border: 3px solid #333;
+      border-radius: 10px;
       cursor: pointer;
       transition: background-color 0.3s;
       display: flex;
       align-items: center;
       justify-content: center;
+      direction: ltr;
     }
     .option:hover {
-      background-color: #333333;
+      background-color: #333;
     }
-    /* تعديل حجم وأبعاد الصور لتكون أكبر وعريضة */
     .icon {
       width: 50px;
       height: 35px;
-      margin: 0 10px;
       object-fit: contain;
+      border-radius: 5px;
+    }
+    .option-text {
+      direction: rtl;
+      margin-left: 10px;
     }
     .note {
-      margin-top: 20px;
+      margin-top: 30px;
       font-size: 0.95em;
-      color: yellow;
+      text-align: right;
+      color: #ffffff;
     }
     .details {
       text-align: right;
-      font-size: 1.3em;
-      white-space: pre-line;
+      font-size: 1.2em;
       line-height: 1.6;
     }
     .details img {
       max-width: 100%;
       display: block;
       margin: 10px auto;
+      border-radius: 10px;
     }
-    /* زر حفظ الصورة */
-    .download-button {
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1.2em;
+   .button {
+  background-color: #1e1e1e;
+  color: #fff;
+  border: 3px solid #333;
+  padding: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  width: 100%;
+  display: block;
+  text-align: center;
+  margin: 10px 0; /* إضافة مسافة 10px فوق وتحت الزر */
+}
+    .button:hover {
+      background-color: #333333;
     }
-    .download-button:hover {
-      background-color: #0056b3;
-    }
-    /* زر المراسلة على التيليجرام */
-    .telegram-button {
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1.2em;
-    }
-    .telegram-button:hover {
-      background-color: #0056b3;
-    }
-    .download-container,
-    .telegram-button-container {
+    .button-container {
       text-align: center;
       margin-top: 20px;
     }
+    
+    .telegram-button a {
+      text-decoration: none;
+    }
+    .blue-button {
+      background-color: #0056b3;
+    }
+    .blue-button:hover {
+      background-color: #004494;
+    }
+    .mastercard-number {
+  color: #ffff55; 
+  font-size: 1.4em;
+  font-weight: bold; 
+  display: block; 
+  text-align: center;
+}
   </style>
 </head>
 <body>
   <div class="container" id="container">
-    <h1>أسعار الاشتراك</h1>
-    <h2>اكو 3 طرق للدفع.</h2>
-    <h2>انت تريد تدفع بأي طريقة ؟</h2>
-    
+    <h1>تفاصيل الاشتراك</h1>
+    <h4>اكو 3 طرق للدفع، اختر الطريقة الي تناسبك</h4>
     <div class="options">
       <div class="option" id="mastercard">
         <img src="pics/1.png" alt="ماستر كارد" class="icon">
-        🔸️ الماستر كارد (29 الف)
+        <span class="option-text">الماستر كارد (29 الف)</span>
       </div>
       <div class="option" id="zaincash">
         <img src="pics/2.png" alt="زين كاش" class="icon">
-        🔸 زين كاش (29 الف)
+        <span class="option-text">زين كاش (29 الف)</span>
       </div>
       <div class="option" id="cards">
         <img src="pics/3.png" alt="كارتات الرصيد" class="icon">
-        🔸️ كارتات رصيد (50 الف)
+        <span class="option-text">كارتات رصيد (50 الف)</span>
       </div>
     </div>
     <p class="note">
@@ -129,52 +137,106 @@
 
     function attachListeners() {
       document.getElementById('mastercard')?.addEventListener('click', function() {
-        showDetails(`- سعر الاشتراك 29 الف اذا عن طريق الماستر كارد 💳<br><br>
-- هذا رقم الكي كارد مالتي<br>
-3399410673<br><br>
-- اذا تكدر من تلفونك و حولهن على هذا الرقم ، واذا ما تكدر تحولهن بالبيت، روح لابو المكتب وتنطي هذا الرقم مال الماستر وتنطي الفلوس وراح يحولهن الي<br><br>
-- اذا عندك سؤال او اي شي ما واضح راسلني ع الخاص @Ali_55555 💌`);
+        showDetails("mastercard", 
+`- سعر الاشتراك 29 الف اذا عن طريق الماستر كارد 💳<br><br>- هذا رقم الكي كارد مالتي 
+<br><br><span class="mastercard-number">3399410673</span><br>- اذا تكدر من تلفونك و حولهن على هذا الرقم ، واذا ما تكدر تحولهن بالبيت، روح لابو المكتب وتنطي هذا الرقم مال الماستر وتنطي الفلوس وراح يحولهن الي<br><br>- اذا عندك سؤال او اي شي ما واضح راسلني ع التليكرام 💌    <br><br> `
+);
       });
 
       document.getElementById('zaincash')?.addEventListener('click', function() {
-        showDetails(`1. تروح لأبو المكتب مال الموبايلات وتسألة عندك تحويل زين كاش لو لا ، اذا عدهم تحويل تنطي الفلوس والباركود. وأبو المكتب راح يصور الباركود.<br><br>
-هذا الباركود: <br>
-<img src="pics/barcode.jpg" alt="Barcode"><br>
-<div class="download-container">
-  <a href="pics/barcode.jpg" download="barcode.jpg">
-    <button class="download-button">حفظ الصورة بالجهاز</button>
-  </a>
+        showDetails("zaincash", 
+`- سعر الاشتراك 29 الف اذا عن طريق زين كاش، هذا الباركود مالتي:<br><br>
+<img src="pics/barcode.jpg" alt="Barcode">
+<div class="button-container">
+  <button class="button blue-button" onclick="downloadImage()">حفظ الصورة بالجهاز</button>
 </div>
-<br>
-2. ورة ما يكمل ويحولهن للاستاذ ، راح تطلع رسالة بتلفون ابو المكتب مكتوب تم التحويل. تصورها بتلفونك<br><br>
-3. وبعدها تجي ترسل الصورة ع الخاص @Ali_55555 وراح اضيفك للقناة مال الخصوصي.`);
+- تروح لأبو المكتب مال الموبايلات وتسألة عندك تحويل زين كاش لو لا، اذا عدهم تحويل تنطي الفلوس والباركود. وأبو المكتب راح يصور الباركود.<br><br>- ورة ما يكمل ويحولهن للاستاذ، راح تطلع رسالة بتلفون ابو المكتب مكتوب تم التحويل. تصورها بتلفونك.<br><br> - وبعدها تجي ترسل الصورة ع التليكرام وراح اضيفك للخصوصي.
+<br><br>`        );
       });
-
+      
       document.getElementById('cards')?.addEventListener('click', function() {
-        showDetails(`الاشتراك ع الرصيد ب50 الف ، تشتري الرصيد وتصورة وتدزة الي ع الخاص @Ali_55555`);
+        showDetails("cards", 
+`سعر الاشتراك 50 الف اذا عن طريق كارتات الرصيد،
+تصور الكارت وترسلة للاستاذ ع التيليجرام
+<br>
+________________________
+<br>
+هذي الكارتات الي اخذهن<br>
+<img src="pics/4.jpg" alt="Image">
+اخذ كارت ابو ال5 او 10 اثير او اسيا
+<br>
+________________________
+<br>
+هذي الكارتات الي ما اخذهن <br>
+<img src="pics/5.jpg" alt="Image">
+- كورك ما ناخذة
+<br>- كارت ابو15 او اكثر ما ناخذة<br>
+- كارت ورقي ابيض ما ناخذة<br><br>
+`
+        );
       });
     }
 
-    function showDetails(detailsContent) {
-      const telegramButton = `<div class="telegram-button-container">
-        <a href="https://t.me/Ali_55555" target="_blank">
-          <button class="telegram-button">مراسلة الاستاذ على التيليجرام</button>
-        </a>
-      </div>`;
-      history.pushState({ page: "details" }, "", "#details");
-      container.innerHTML = `<div class="details">${detailsContent}<br><br>${telegramButton}</div>`;
+function showDetails(paymentType, detailsContent, push = true) {
+    const installmentButton = `
+        <button class="button" onclick="showInstallmentInfo('${paymentType}')">يصير ادفعهن اقساط؟</button>
+    `;
+    const telegramButton = `
+        <button class="button" onclick="openTelegram()">مراسلة الاستاذ على التليكرام</button>
+    `;
+    if (push) {
+        history.pushState({ page: "details", paymentType: paymentType, detailsContent: detailsContent }, "", `#${paymentType}`);
     }
+    container.innerHTML = `
+        <div class="details">
+            ${detailsContent}
+        </div>
+        ${installmentButton}${telegramButton}
+    `;
+}
 
-    window.addEventListener('popstate', function(event) {
-      if (!event.state || event.state.page === "main") {
+function downloadImage() {
+  const link = document.createElement('a');
+  link.href = 'pics/barcode.jpg';
+  link.download = 'barcode.jpg';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+function openTelegram() {
+    window.open('https://t.me/ali_55555', '_blank');
+}
+
+function showInstallmentInfo(paymentType, push = true) {
+    let message = paymentType === "cards"
+        ? `اي يصير اول ما تدخل تدفع 25 الف ، وبعد شهر تدفع 25 الف الاخرى. 💭<br><br>
+بس اذا ما دفعت ورة شهر راح ينحظر حسابك من قناة الخصوصي 🚫<br>
+ف ضروري لازم تدفع القسط الثاني ورة شهر`
+        : `لا اعتذر ما يصير اقساط<br>
+بما انو انت تريد تشترك عن طريق ${paymentType === "mastercard" ? "الماستر كارد" : "زين كاش"} ف لازم تدفع دفعة وحدة<br><br>
+لو تشترك على كارتات الرصيد يصير اقساط`;
+    if (push) {
+        history.pushState({ page: "installment", paymentType: paymentType }, "", "#installment");
+    }
+    container.innerHTML = `
+        <div class="details">
+            ${message}
+        </div>
+    `;
+}
+
+window.addEventListener('popstate', function(event) {
+    if (event.state && event.state.page === "details") {
+        showDetails(event.state.paymentType, event.state.detailsContent, false);
+        attachListeners(); // إعادة تفعيل المستمعين
+    } else if (event.state && event.state.page === "installment") {
+        showInstallmentInfo(event.state.paymentType, false);
+    } else {
         container.innerHTML = mainHTML;
         attachListeners();
-      }
-    });
-
-    if (!history.state) {
-      history.replaceState({ page: "main" }, "", location.pathname);
     }
+});
 
     attachListeners();
   </script>
