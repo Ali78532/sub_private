@@ -2,6 +2,8 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
+  <!-- لضمان التوافق مع الأجهزة المحمولة -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>أسعار الاشتراك – الخصوصي</title>
   <style>
     body {
@@ -11,6 +13,7 @@
       margin: 0;
       padding: 20px;
       direction: rtl;
+      font-size: 18px;
     }
     .container {
       max-width: 800px;
@@ -31,14 +34,24 @@
       border-radius: 8px;
       cursor: pointer;
       transition: background-color 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .option:hover {
       background-color: #333333;
     }
+    /* تعديل حجم وأبعاد الصور لتكون أكبر وعريضة */
+    .icon {
+      width: 50px;
+      height: 35px;
+      margin: 0 10px;
+      object-fit: contain;
+    }
     .note {
       margin-top: 20px;
-      font-size: 0.9em;
-      color: #bbbbbb;
+      font-size: 0.95em;
+      color: yellow;
     }
     .details {
       text-align: right;
@@ -51,20 +64,36 @@
       display: block;
       margin: 10px auto;
     }
-    .details button {
-      background-color: #333333;
+    /* زر حفظ الصورة */
+    .download-button {
+      background-color: #007bff;
       color: #fff;
       border: none;
-      padding: 10px 20px;
+      padding: 12px 24px;
       border-radius: 5px;
       cursor: pointer;
-      margin-top: 10px;
+      font-size: 1.2em;
     }
-    .details button:hover {
-      background-color: #555555;
+    .download-button:hover {
+      background-color: #0056b3;
     }
-    .download-container {
+    /* زر المراسلة على التيليجرام */
+    .telegram-button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2em;
+    }
+    .telegram-button:hover {
+      background-color: #0056b3;
+    }
+    .download-container,
+    .telegram-button-container {
       text-align: center;
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -75,11 +104,23 @@
     <h2>انت تريد تدفع بأي طريقة ؟</h2>
     
     <div class="options">
-      <div class="option" id="mastercard">??? الماستر كارد (29 الف)</div>
-      <div class="option" id="zaincash">?? زين كاش (29 الف)</div>
-      <div class="option" id="cards">??? كارتات رصيد (50 الف)</div>
+      <div class="option" id="mastercard">
+        <img src="pics/1.png" alt="ماستر كارد" class="icon">
+        🔸️ الماستر كارد (29 الف)
+      </div>
+      <div class="option" id="zaincash">
+        <img src="pics/2.png" alt="زين كاش" class="icon">
+        🔸 زين كاش (29 الف)
+      </div>
+      <div class="option" id="cards">
+        <img src="pics/3.png" alt="كارتات الرصيد" class="icon">
+        🔸️ كارتات رصيد (50 الف)
+      </div>
     </div>
-    <p class="note">ملاحظة: راح اضيفك للخصوصي بعد ما تدفع مبلغ الاشتراك. ما اضيف احد قبل ما يدفع نهائيا!</p>
+    <p class="note">
+      وقت المحاضرة الساعة ب11 بليل ⏰<br>
+      ملاحظة: راح اضيفك للخصوصي بعد ما تدفع مبلغ الاشتراك. ما اضيف احد قبل ما يدفع نهائيا!
+    </p>
   </div>
 
   <script>
@@ -88,11 +129,11 @@
 
     function attachListeners() {
       document.getElementById('mastercard')?.addEventListener('click', function() {
-        showDetails(`- سعر الاشتراك 29 الف اذا عن طريق الماستر كارد ??<br><br>
+        showDetails(`- سعر الاشتراك 29 الف اذا عن طريق الماستر كارد 💳<br><br>
 - هذا رقم الكي كارد مالتي<br>
 3399410673<br><br>
 - اذا تكدر من تلفونك و حولهن على هذا الرقم ، واذا ما تكدر تحولهن بالبيت، روح لابو المكتب وتنطي هذا الرقم مال الماستر وتنطي الفلوس وراح يحولهن الي<br><br>
-- اذا عندك سؤال او اي شي ما واضح راسلني ع الخاص @Ali_55555 ??`);
+- اذا عندك سؤال او اي شي ما واضح راسلني ع الخاص @Ali_55555 💌`);
       });
 
       document.getElementById('zaincash')?.addEventListener('click', function() {
@@ -101,7 +142,7 @@
 <img src="pics/barcode.jpg" alt="Barcode"><br>
 <div class="download-container">
   <a href="pics/barcode.jpg" download="barcode.jpg">
-    <button>حفظ الصورة بالجهاز</button>
+    <button class="download-button">حفظ الصورة بالجهاز</button>
   </a>
 </div>
 <br>
@@ -115,8 +156,13 @@
     }
 
     function showDetails(detailsContent) {
+      const telegramButton = `<div class="telegram-button-container">
+        <a href="https://t.me/Ali_55555" target="_blank">
+          <button class="telegram-button">مراسلة الاستاذ على التيليجرام</button>
+        </a>
+      </div>`;
       history.pushState({ page: "details" }, "", "#details");
-      container.innerHTML = `<div class="details">${detailsContent}</div>`;
+      container.innerHTML = `<div class="details">${detailsContent}<br><br>${telegramButton}</div>`;
     }
 
     window.addEventListener('popstate', function(event) {
