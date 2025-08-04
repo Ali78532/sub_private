@@ -126,7 +126,7 @@
       </div>
     </div>
     <p class="note">
-      وقت المحاضرة الساعة ب4 العصر ونعيدها ب10 بليل ⏰<br>
+      وقت المحاضرة الساعة ب4 العصر⏰<br>
       ملاحظة: راح اضيفك للخصوصي بعد ما تدفع مبلغ الاشتراك. ما اضيف احد قبل ما يدفع نهائيا!
     </p>
   </div>
@@ -158,30 +158,45 @@
         showDetails("cards", 
 `
 ماناخذ كارتات رصيد بس زين كاش وماستر كارد
+<br><br>
 
-<br><br><br><br><br><br><br><br><br>
 `
         );
       });
     }
 
-function showDetails(paymentType, detailsContent, push = true) {
-    const installmentButton = `
-        <button class="button" onclick="showInstallmentInfo('${paymentType}')">يصير ادفعهن اقساط؟</button>
-    `;
+  function showDetails(paymentType, detailsContent, push = true) {
+    // زر الأقساط يظهر فقط إذا لم يكن الخيار 'cards'
+    const installmentButton = paymentType === 'cards'
+      ? '' 
+      : `<button class="button" onclick="showInstallmentInfo('${paymentType}')">
+           يصير ادفعهن اقساط؟
+         </button>`;
+
     const telegramButton = `
-        <button class="button" onclick="openTelegram()">مراسلة الاستاذ على التليكرام</button>
+      <button class="button" onclick="openTelegram()">
+        مراسلة الاستاذ على التليكرام
+      </button>
     `;
+
+    // تحديث حالة التاريخ (history)
     if (push) {
-        history.pushState({ page: "details", paymentType: paymentType, detailsContent: detailsContent }, "", `#${paymentType}`);
+      history.pushState(
+        { page: "details", paymentType, detailsContent },
+        "",
+        `#${paymentType}`
+      );
     }
+
+    // عرض المحتوى مع الأزرار المناسبة
     container.innerHTML = `
-        <div class="details">
-            ${detailsContent}
-        </div>
-        ${installmentButton}${telegramButton}
+      <div class="details">
+        ${detailsContent}
+      </div>
+      ${installmentButton}
+      ${telegramButton}
     `;
-}
+  }
 
 function downloadImage() {
   const link = document.createElement('a');
